@@ -1,8 +1,52 @@
-import React from 'react';
-import { Play, Star, Download, Share2, Film, Video, Camera } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Play, Pause, Star, Download, Share2, Film, Video, Camera } from 'lucide-react';
 import { Header } from '../components/common/Header';
 
 export const DocumentaryPage: React.FC = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const handleTimeUpdate = () => {
+    if (videoRef.current) {
+      setCurrentTime(videoRef.current.currentTime);
+    }
+  };
+
+  const handleLoadedMetadata = () => {
+    if (videoRef.current) {
+      setDuration(videoRef.current.duration);
+    }
+  };
+
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (videoRef.current) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const percentage = clickX / rect.width;
+      videoRef.current.currentTime = percentage * duration;
+    }
+  };
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
     <div className="flex flex-col h-full bg-gradient-to-b from-slate-900 to-slate-800">
@@ -11,19 +55,58 @@ export const DocumentaryPage: React.FC = () => {
       <div className="flex-1 overflow-auto">
         {/* Video Player */}
         <div className="aspect-video bg-black relative">
-          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-slate-800 to-black">
-            <div className="text-center">
-              <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mb-4 mx-auto cursor-pointer hover:bg-white/20 transition-all">
+          <video
+            ref={videoRef}
+            className="w-full h-full object-contain"
+            onTimeUpdate={handleTimeUpdate}
+            onLoadedMetadata={handleLoadedMetadata}
+            onEnded={() => setIsPlaying(false)}
+          >
+            <source src="/eagles-conquer-dallas.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+
+          {/* Play/Pause Overlay */}
+          {!isPlaying && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+              <button
+                onClick={togglePlay}
+                className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center cursor-pointer hover:bg-white/20 transition-all backdrop-blur-sm"
+              >
                 <Play className="w-10 h-10 text-white ml-1" />
-              </div>
-              <h2 className="text-white text-2xl font-bold mb-1">THE INVASION OF DALLAS</h2>
-              <p className="text-slate-400">An Eagles Fan Story • 18:34</p>
+              </button>
+            </div>
+          )}
+
+          {/* Video Controls */}
+          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+            <div className="flex items-center gap-3 mb-2">
+              <button onClick={togglePlay} className="text-white">
+                {isPlaying ? (
+                  <Pause className="w-6 h-6" />
+                ) : (
+                  <Play className="w-6 h-6" />
+                )}
+              </button>
+              <span className="text-white text-sm font-medium">
+                {formatTime(currentTime)} / {formatTime(duration)}
+              </span>
+            </div>
+            <div
+              onClick={handleSeek}
+              className="h-1 bg-slate-700 rounded-full overflow-hidden cursor-pointer"
+            >
+              <div
+                className="h-full bg-amber-500 rounded-full transition-all"
+                style={{ width: `${progress}%` }}
+              />
             </div>
           </div>
-          <div className="absolute bottom-0 left-0 right-0 p-4">
-            <div className="h-1 bg-slate-700 rounded-full overflow-hidden">
-              <div className="h-full w-0 bg-amber-500 rounded-full" />
-            </div>
+
+          {/* Title Overlay */}
+          <div className="absolute top-4 left-4 right-4">
+            <h2 className="text-white text-2xl font-bold mb-1 drop-shadow-lg">THE INVASION OF DALLAS</h2>
+            <p className="text-slate-300 drop-shadow-lg">An Eagles Fan Story</p>
           </div>
         </div>
 
@@ -45,7 +128,7 @@ export const DocumentaryPage: React.FC = () => {
             {[
               {
                 title: 'Full Documentary',
-                duration: '18:34',
+                duration: formatTime(duration || 0),
                 format: 'HD 1080p',
                 icon: Film,
                 color: 'text-amber-400',
@@ -69,7 +152,7 @@ export const DocumentaryPage: React.FC = () => {
               return (
                 <div
                   key={i}
-                  className="bg-slate-800 rounded-xl p-4 flex items-center justify-between"
+                  className="bg-slate-800 rounded-xl p-4 flex items-center justify-between cursor-pointer hover:bg-slate-700 transition-all"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-lg bg-slate-700 flex items-center justify-center">
@@ -92,7 +175,7 @@ export const DocumentaryPage: React.FC = () => {
           <h3 className="text-white font-semibold mb-3">Share To</h3>
           <div className="flex gap-3 mb-6">
             {['Instagram', 'TikTok', 'YouTube', 'Facebook'].map((platform, i) => (
-              <div key={i} className="flex-1 bg-slate-800 rounded-xl p-3 text-center">
+              <div key={i} className="flex-1 bg-slate-800 rounded-xl p-3 text-center cursor-pointer hover:bg-slate-700 transition-all">
                 <div className="w-10 h-10 rounded-full bg-slate-700 mx-auto mb-2 flex items-center justify-center">
                   <Share2 className="w-5 h-5 text-slate-400" />
                 </div>
@@ -115,7 +198,7 @@ export const DocumentaryPage: React.FC = () => {
             ].map((item, i) => (
               <div
                 key={i}
-                className="bg-slate-800 rounded-xl p-4 flex items-center justify-between"
+                className="bg-slate-800 rounded-xl p-4 flex items-center justify-between cursor-pointer hover:bg-slate-700 transition-all"
               >
                 <div>
                   <p className="text-white font-medium">{item.title}</p>
