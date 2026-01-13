@@ -9,8 +9,8 @@ export const LiveCapturePage: React.FC = () => {
   const navigate = useNavigate();
   const [captureMode, setCaptureMode] = useState<'video' | 'photo' | 'audio'>('video');
   const [showNotification, setShowNotification] = useState(false);
-  const [showAIPrompts, setShowAIPrompts] = useState(true);
-  const [showLiveScore, setShowLiveScore] = useState(true);
+  const showAIPrompts = true;
+  const showLiveScore = true;
 
   const gameScore: GameScore = {
     homeTeam: 'Cowboys',
@@ -22,7 +22,7 @@ export const LiveCapturePage: React.FC = () => {
     status: 'in-progress',
   };
 
-  const handleCapturePrompt = (prompt: string) => {
+  const handleCapturePrompt = () => {
     setShowNotification(true);
     setTimeout(() => setShowNotification(false), 5000);
   };

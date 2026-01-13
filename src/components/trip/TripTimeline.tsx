@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Clock, CheckCircle, Circle, Calendar, Plane, MapPin, Film } from 'lucide-react';
-import { TripTimeline as TripTimelineType } from '../../types';
+import { Clock, CheckCircle, Circle, Plane, MapPin, Film } from 'lucide-react';
 
 interface TripTimelineProps {
   gameDate: string;

@@ -96,7 +96,7 @@ export const useUserStore = create<UserStore>((set) => ({
       },
     })),
 
-  recordTrip: (city, stadium) =>
+  recordTrip: (_city, stadium) =>
     set((state) => {
       const newCitiesVisited = state.stats.citiesVisited + 1;
       const newStadiumsVisited = [...state.stats.stadiumsVisited, stadium];

@@ -9,7 +9,6 @@ interface LiveGameScoreProps {
 
 export const LiveGameScore: React.FC<LiveGameScoreProps> = ({ gameScore, onCapturePrompt }) => {
   const [recentEvents, setRecentEvents] = useState<GameEvent[]>([]);
-  const [pulseScore, setPulseScore] = useState(false);
 
   useEffect(() => {
     // Simulate recent game events

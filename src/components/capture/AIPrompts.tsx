@@ -11,14 +11,13 @@ interface AIPromptsProps {
 export const AIPrompts: React.FC<AIPromptsProps> = ({
   location,
   timeOfDay,
-  narrativeType,
   gameStatus = 'before',
 }) => {
   const [currentPrompt, setCurrentPrompt] = useState('');
   const [isListening, setIsListening] = useState(false);
 
   const generatePrompts = () => {
-    const prompts = {
+    const prompts: Record<string, Record<string, string[]>> = {
       before: {
         morning: [
           "Show us your game day outfit! What are you wearing to represent?",
@@ -35,6 +34,7 @@ export const AIPrompts: React.FC<AIPromptsProps> = ({
           "Film your entrance - how does it feel stepping into enemy territory?",
           "Show us the pre-game energy in your section",
         ],
+        night: [],
       },
       during: {
         morning: [],
@@ -44,8 +44,11 @@ export const AIPrompts: React.FC<AIPromptsProps> = ({
           "Film the crowd's reaction - what's the energy like?",
           "Show us your game face - how are you feeling right now?",
         ],
+        night: [],
       },
       after: {
+        morning: [],
+        afternoon: [],
         evening: [
           "Capture your immediate post-game reaction",
           "Film the walk back - what's everyone saying?",
@@ -59,7 +62,7 @@ export const AIPrompts: React.FC<AIPromptsProps> = ({
       },
     };
 
-    const timePrompts = prompts[gameStatus][timeOfDay] || [];
+    const timePrompts = prompts[gameStatus]?.[timeOfDay] || [];
     return timePrompts;
   };
 

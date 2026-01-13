@@ -8,7 +8,6 @@ interface UserLevelProps {
 }
 
 export const UserLevel: React.FC<UserLevelProps> = ({ level, points, showProgress = true }) => {
-  const pointsForNextLevel = level * 200;
   const pointsInCurrentLevel = points % 200;
   const progressPercent = (pointsInCurrentLevel / 200) * 100;
 
