@@ -12,10 +12,16 @@ import {
   Music,
   Home,
   Film,
+  Share2,
 } from 'lucide-react';
 import { Header } from '../components/common/Header';
 import { sampleItinerary } from '../data/itineraries';
 import { BookingModal } from '../components/booking/BookingModal';
+import { TripTimeline } from '../components/trip/TripTimeline';
+import { ShareModal } from '../components/social/ShareModal';
+import { WeatherCard } from '../components/alerts/WeatherCard';
+import { TravelAlerts } from '../components/alerts/TravelAlerts';
+import { WeatherForecast, TravelAlert } from '../types';
 
 const iconMap = {
   Beer,
@@ -34,14 +40,54 @@ export const TripDetailsPage: React.FC = () => {
   const { narrativeId } = useParams<{ narrativeId: string }>();
   const [tripDay, setTripDay] = useState(1);
   const [showBookingModal, setShowBookingModal] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
+
+  // Mock data for weather and alerts
+  const weatherForecast: WeatherForecast = {
+    city: 'Dallas, TX',
+    date: 'Nov 10',
+    temp: 68,
+    condition: 'Sunny',
+    icon: '☀️',
+    precipitation: 10,
+    wind: 12,
+  };
+
+  const travelAlerts: TravelAlert[] = [
+    {
+      id: '1',
+      type: 'recommendation',
+      severity: 'info',
+      title: 'Popular Tailgate Spot',
+      message: "Don't miss the legendary BBQ at Lot C - arrive early!",
+      actionLabel: 'View Map',
+      timestamp: new Date(),
+    },
+    {
+      id: '2',
+      type: 'weather',
+      severity: 'warning',
+      title: 'Temperature Drop Expected',
+      message: 'Bring a jacket for evening - temps will drop to 45°F after game',
+      timestamp: new Date(),
+    },
+  ];
 
   return (
     <div className="flex flex-col h-full bg-gradient-to-b from-slate-900 to-slate-800">
       <div className="p-4 border-b border-slate-700">
         <Header showBack />
-        <div className="text-center mb-4">
-          <p className="text-amber-400 text-sm font-medium">RIVALRY CONQUEST</p>
-          <p className="text-white font-bold">The Invasion of Dallas</p>
+        <div className="flex items-center justify-between mb-4">
+          <div className="text-center flex-1">
+            <p className="text-amber-400 text-sm font-medium">RIVALRY CONQUEST</p>
+            <p className="text-white font-bold">The Invasion of Dallas</p>
+          </div>
+          <button
+            onClick={() => setShowShareModal(true)}
+            className="bg-slate-800 hover:bg-slate-700 rounded-full p-2 transition-all"
+          >
+            <Share2 className="w-5 h-5 text-amber-400" />
+          </button>
         </div>
 
         {/* Day Selector */}
@@ -63,6 +109,24 @@ export const TripDetailsPage: React.FC = () => {
       </div>
 
       <div className="flex-1 overflow-auto p-4">
+        {/* Trip Timeline */}
+        <div className="mb-6">
+          <TripTimeline gameDate="November 10, 2024" status="upcoming" />
+        </div>
+
+        {/* Weather Forecast */}
+        <div className="mb-6">
+          <h3 className="text-white font-semibold mb-3">Weather Forecast</h3>
+          <WeatherCard forecast={weatherForecast} />
+        </div>
+
+        {/* Travel Alerts */}
+        <div className="mb-6">
+          <TravelAlerts alerts={travelAlerts} />
+        </div>
+
+        {/* Itinerary */}
+        <h3 className="text-white font-semibold mb-3">Itinerary</h3>
         <div className="mb-4">
           <h2 className="text-xl font-bold text-white">{sampleItinerary[tripDay].title}</h2>
           <p className="text-slate-400 text-sm">
@@ -159,6 +223,15 @@ export const TripDetailsPage: React.FC = () => {
 
       {showBookingModal && (
         <BookingModal onClose={() => setShowBookingModal(false)} narrativeId={narrativeId || ''} />
+      )}
+
+      {showShareModal && (
+        <ShareModal
+          onClose={() => setShowShareModal(false)}
+          title="The Invasion of Dallas"
+          description="Eagles vs Cowboys • November 10, 2024"
+          type="trip"
+        />
       )}
     </div>
   );

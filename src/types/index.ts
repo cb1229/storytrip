@@ -145,3 +145,114 @@ export interface BookingFormData {
   // Payment
   paymentMethod: 'card' | 'paypal';
 }
+
+// Timeline and Progress
+export interface TripTimeline {
+  tripId: string;
+  gameDate: Date;
+  status: 'upcoming' | 'in-progress' | 'completed' | 'processing-documentary';
+  daysUntilTrip: number;
+  milestones: TimelineMilestone[];
+}
+
+export interface TimelineMilestone {
+  id: string;
+  title: string;
+  date: Date;
+  completed: boolean;
+  type: 'booking' | 'departure' | 'arrival' | 'game' | 'return' | 'documentary';
+}
+
+// Social and Sharing
+export interface TripInvitation {
+  id: string;
+  tripId: string;
+  invitedBy: string;
+  invitedEmail: string;
+  status: 'pending' | 'accepted' | 'declined';
+  sentAt: Date;
+}
+
+export interface ShareContent {
+  type: 'trip' | 'documentary' | 'itinerary';
+  title: string;
+  description: string;
+  url: string;
+  imageUrl?: string;
+}
+
+// Gamification
+export interface Achievement {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  unlockedAt?: Date;
+  progress?: number;
+  target?: number;
+}
+
+export interface UserStats {
+  tripsCompleted: number;
+  filmsCreated: number;
+  citiesVisited: number;
+  stadiumsVisited: string[];
+  totalPoints: number;
+  level: number;
+  achievements: Achievement[];
+}
+
+// Live Game Integration
+export interface GameScore {
+  homeTeam: string;
+  awayTeam: string;
+  homeScore: number;
+  awayScore: number;
+  quarter: string;
+  timeRemaining: string;
+  status: 'scheduled' | 'in-progress' | 'final';
+}
+
+export interface GameEvent {
+  type: 'touchdown' | 'field-goal' | 'turnover' | 'halftime' | 'final';
+  team: string;
+  description: string;
+  timestamp: Date;
+  suggestedPrompt?: string;
+}
+
+// Weather and Alerts
+export interface WeatherForecast {
+  city: string;
+  date: string;
+  temp: number;
+  condition: string;
+  icon: string;
+  precipitation: number;
+  wind: number;
+}
+
+export interface TravelAlert {
+  id: string;
+  type: 'flight-delay' | 'weather' | 'traffic' | 'recommendation' | 'reminder';
+  severity: 'info' | 'warning' | 'urgent';
+  title: string;
+  message: string;
+  actionLabel?: string;
+  actionUrl?: string;
+  timestamp: Date;
+}
+
+// Enhanced Booking History
+export interface BookingHistory {
+  id: string;
+  tripTitle: string;
+  narrativeType: string;
+  gameInfo: GameInfo;
+  confirmationNumber: string;
+  bookedAt: Date;
+  travelers: number;
+  total: number;
+  status: 'upcoming' | 'completed' | 'cancelled';
+  bookingDetails: BookingDetails;
+}

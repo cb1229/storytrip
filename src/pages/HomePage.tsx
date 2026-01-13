@@ -48,7 +48,12 @@ export const HomePage: React.FC = () => {
         <div className="mb-6">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-semibold text-white">Your Stories</h2>
-            <span className="text-amber-400 text-sm">View all</span>
+            <button
+              onClick={() => navigate('/trips-gallery')}
+              className="text-amber-400 text-sm hover:text-amber-300 transition-all"
+            >
+              View all
+            </button>
           </div>
           <div className="flex gap-3 overflow-x-auto pb-2">
             {pastTrips.map((trip) => (

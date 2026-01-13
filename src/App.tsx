@@ -5,6 +5,7 @@ import { TripDetailsPage } from './pages/TripDetailsPage';
 import { LiveCapturePage } from './pages/LiveCapturePage';
 import { DocumentaryPage } from './pages/DocumentaryPage';
 import { ProfilePage } from './pages/ProfilePage';
+import { TripsGalleryPage } from './pages/TripsGalleryPage';
 import { PhoneFrame } from './components/common/PhoneFrame';
 import { ToastContainer } from './components/common/Toast';
 import { useToastStore } from './hooks/useToast';
@@ -25,6 +26,7 @@ function App() {
           <Route path="/live/:tripId" element={<LiveCapturePage />} />
           <Route path="/documentary/:tripId" element={<DocumentaryPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/trips-gallery" element={<TripsGalleryPage />} />
         </Routes>
       </PhoneFrame>
 
