@@ -33,7 +33,10 @@ export const BottomNav: React.FC = () => {
         <Film className="w-6 h-6" />
         <span className="text-xs mt-1">Stories</span>
       </button>
-      <button className="flex flex-col items-center text-slate-500">
+      <button
+        onClick={() => navigate('/profile')}
+        className={`flex flex-col items-center ${isActive('/profile') ? 'text-amber-400' : 'text-slate-500'}`}
+      >
         <User className="w-6 h-6" />
         <span className="text-xs mt-1">Profile</span>
       </button>

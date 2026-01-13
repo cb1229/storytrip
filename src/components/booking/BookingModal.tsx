@@ -5,6 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { X, Check } from 'lucide-react';
 import { BookingFormData } from '../../types';
+import { BookingSuccessModal } from './BookingSuccessModal';
+import { useToast } from '../../hooks/useToast';
 
 const bookingSchema = z.object({
   travelers: z.number().min(1).max(10),
@@ -25,8 +27,10 @@ interface BookingModalProps {
 
 export const BookingModal: React.FC<BookingModalProps> = ({ onClose }) => {
   const navigate = useNavigate();
+  const toast = useToast();
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const {
     register,
@@ -46,14 +50,40 @@ export const BookingModal: React.FC<BookingModalProps> = ({ onClose }) => {
 
   const onSubmit = async (data: BookingFormData) => {
     setIsSubmitting(true);
+    toast.info('Processing your booking...');
+
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log('Booking data:', data);
+
+    // Store booking in localStorage
+    const booking = {
+      ...data,
+      total: 847 * data.travelers,
+      gameDate: 'November 10, 2024',
+      confirmationNumber: `ST-${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
+      bookedAt: new Date().toISOString(),
+    };
+
+    localStorage.setItem('latestBooking', JSON.stringify(booking));
+
     setIsSubmitting(false);
-    navigate('/live/demo');
+    toast.success('Booking confirmed!');
+    setShowSuccess(true);
   };
 
   const travelers = watch('travelers');
+
+  if (showSuccess) {
+    return (
+      <BookingSuccessModal
+        bookingDetails={{
+          total: 847 * travelers,
+          travelers,
+          gameDate: 'November 10, 2024',
+        }}
+      />
+    );
+  }
 
   return (
     <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
