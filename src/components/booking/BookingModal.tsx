@@ -23,7 +23,7 @@ interface BookingModalProps {
   narrativeId: string;
 }
 
-export const BookingModal: React.FC<BookingModalProps> = ({ onClose, narrativeId }) => {
+export const BookingModal: React.FC<BookingModalProps> = ({ onClose }) => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);

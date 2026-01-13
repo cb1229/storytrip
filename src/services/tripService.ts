@@ -1,5 +1,5 @@
 import api from './api';
-import { Trip, BookingFormData } from '../types';
+import { Trip } from '../types';
 
 export const tripService = {
   // Get all trips

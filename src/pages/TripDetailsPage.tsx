@@ -32,7 +32,6 @@ const iconMap = {
 
 export const TripDetailsPage: React.FC = () => {
   const { narrativeId } = useParams<{ narrativeId: string }>();
-  const navigate = useNavigate();
   const [tripDay, setTripDay] = useState(1);
   const [showBookingModal, setShowBookingModal] = useState(false);
 

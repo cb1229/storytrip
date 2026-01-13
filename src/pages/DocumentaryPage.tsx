@@ -1,10 +1,8 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Play, Star, Download, Share2, Film, Video, Camera } from 'lucide-react';
 import { Header } from '../components/common/Header';
 
 export const DocumentaryPage: React.FC = () => {
-  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col h-full bg-gradient-to-b from-slate-900 to-slate-800">
