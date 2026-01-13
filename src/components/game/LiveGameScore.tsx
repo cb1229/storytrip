@@ -60,9 +60,7 @@ export const LiveGameScore: React.FC<LiveGameScoreProps> = ({ gameScore, onCaptu
 
           {/* Score */}
           <div className="text-center">
-            <div
-              className={`text-4xl font-bold mb-1 ${pulseScore ? 'animate-pulse' : ''}`}
-            >
+            <div className="text-4xl font-bold mb-1">
               <span className={isLeading ? 'text-green-400' : 'text-white'}>
                 {gameScore.awayScore}
               </span>
