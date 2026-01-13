@@ -6,14 +6,17 @@ export const DocumentaryPage: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const togglePlay = () => {
     if (videoRef.current) {
       if (isPlaying) {
         videoRef.current.pause();
+        setIsFullscreen(false);
       } else {
         videoRef.current.play();
+        setIsFullscreen(true);
       }
       setIsPlaying(!isPlaying);
     }
@@ -50,11 +53,13 @@ export const DocumentaryPage: React.FC = () => {
 
   return (
     <div className="flex flex-col h-full bg-gradient-to-b from-slate-900 to-slate-800">
-      <Header title="Your Documentary" showBack rightIcon={<Share2 className="w-6 h-6 text-slate-400" />} />
+      {!isFullscreen && (
+        <Header title="Your Documentary" showBack rightIcon={<Share2 className="w-6 h-6 text-slate-400" />} />
+      )}
 
-      <div className="flex-1 overflow-auto">
+      <div className={`${isFullscreen ? 'fixed inset-0 z-50' : 'flex-1 overflow-auto'}`}>
         {/* Video Player */}
-        <div className="aspect-video bg-black relative">
+        <div className={`${isFullscreen ? 'h-full' : 'aspect-video'} bg-black relative`}>
           <video
             ref={videoRef}
             className="w-full h-full object-contain"
@@ -104,13 +109,16 @@ export const DocumentaryPage: React.FC = () => {
           </div>
 
           {/* Title Overlay */}
-          <div className="absolute top-4 left-4 right-4">
-            <h2 className="text-white text-2xl font-bold mb-1 drop-shadow-lg">THE INVASION OF DALLAS</h2>
-            <p className="text-slate-300 drop-shadow-lg">An Eagles Fan Story</p>
-          </div>
+          {!isFullscreen && (
+            <div className="absolute top-4 left-4 right-4">
+              <h2 className="text-white text-2xl font-bold mb-1 drop-shadow-lg">THE INVASION OF DALLAS</h2>
+              <p className="text-slate-300 drop-shadow-lg">An Eagles Fan Story</p>
+            </div>
+          )}
         </div>
 
-        <div className="p-4">
+        {!isFullscreen && (
+          <div className="p-4">
           {/* Film Info */}
           <div className="flex items-center gap-4 mb-6">
             <div className="flex items-center gap-1">
@@ -209,6 +217,7 @@ export const DocumentaryPage: React.FC = () => {
             ))}
           </div>
         </div>
+        )}
       </div>
     </div>
   );
