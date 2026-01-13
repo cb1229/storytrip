@@ -1,0 +1,115 @@
+import { DayItinerary } from '../types';
+
+export const sampleItinerary: Record<number, DayItinerary> = {
+  1: {
+    title: 'ACT I: The Gathering',
+    events: [
+      {
+        time: '6:00 PM',
+        title: 'The War Room',
+        location: 'PHL Airport Bar',
+        iconName: 'Beer',
+        story: 'Meet fellow fans, record your pre-battle speech',
+        type: 'story',
+      },
+      {
+        time: '8:30 PM',
+        title: 'Entering Enemy Territory',
+        location: 'Flight to DFW',
+        iconName: 'Plane',
+        story: 'First steps on rival soil',
+        type: 'travel',
+      },
+      {
+        time: '11:00 PM',
+        title: 'Base Camp',
+        location: 'Hotel Check-in',
+        iconName: 'Hotel',
+        story: 'Rest before the battle',
+        type: 'lodging',
+      },
+    ],
+  },
+  2: {
+    title: 'ACT II: The Conquest',
+    events: [
+      {
+        time: '9:00 AM',
+        title: 'Scouting the Land',
+        location: 'Local Diner',
+        iconName: 'Coffee',
+        story: 'Observe enemy territory over breakfast',
+        type: 'food',
+      },
+      {
+        time: '11:00 AM',
+        title: 'Finding Allies',
+        location: 'Eagles Bar Meetup',
+        iconName: 'Users',
+        story: 'The army assembles',
+        type: 'story',
+      },
+      {
+        time: '3:00 PM',
+        title: 'The March',
+        location: 'Caravan to Stadium',
+        iconName: 'Car',
+        story: 'Rolling deep through enemy streets',
+        type: 'story',
+      },
+      {
+        time: '4:30 PM',
+        title: 'Planting the Flag',
+        location: 'Tailgate Lot 4',
+        iconName: 'MapPin',
+        story: 'Claim your territory',
+        type: 'story',
+      },
+      {
+        time: '7:20 PM',
+        title: 'THE BATTLE',
+        location: 'AT&T Stadium',
+        iconName: 'Trophy',
+        story: 'The reason we came',
+        type: 'climax',
+      },
+      {
+        time: '10:30 PM',
+        title: 'Victory Formation',
+        location: 'Post-game District',
+        iconName: 'Music',
+        story: 'Celebrate the conquest',
+        type: 'story',
+      },
+    ],
+  },
+  3: {
+    title: 'ACT III: The Return',
+    events: [
+      {
+        time: '10:00 AM',
+        title: 'Spoils of War',
+        location: 'Victory Brunch',
+        iconName: 'Coffee',
+        story: 'Process the triumph',
+        type: 'food',
+      },
+      {
+        time: '2:00 PM',
+        title: 'Homeward Bound',
+        location: 'Flight to PHL',
+        iconName: 'Plane',
+        story: 'Leave conquered territory',
+        type: 'travel',
+      },
+      {
+        time: '5:00 PM',
+        title: 'Heroes Return',
+        location: 'Home',
+        iconName: 'Home',
+        story: 'Changed forever',
+        type: 'story',
+      },
+    ],
+  },
+};
