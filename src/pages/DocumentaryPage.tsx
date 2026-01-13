@@ -52,9 +52,9 @@ export const DocumentaryPage: React.FC = () => {
   const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <div className="flex flex-col h-full bg-gradient-to-b from-slate-900 to-slate-800">
+    <div className="flex flex-col h-full bg-nfl-lightGray">
       {!isFullscreen && (
-        <Header title="Your Documentary" showBack rightIcon={<Share2 className="w-6 h-6 text-slate-400" />} />
+        <Header title="Your Documentary" showBack rightIcon={<Share2 className="w-6 h-6 text-white" />} />
       )}
 
       <div className={`${isFullscreen ? 'fixed inset-0 z-50' : 'flex-1 overflow-auto'}`}>
@@ -123,78 +123,78 @@ export const DocumentaryPage: React.FC = () => {
           <div className="flex items-center gap-4 mb-6">
             <div className="flex items-center gap-1">
               {[1, 2, 3, 4].map((i) => (
-                <Star key={i} className="w-5 h-5 text-amber-400 fill-amber-400" />
+                <Star key={i} className="w-5 h-5 text-nfl-red fill-nfl-red" />
               ))}
-              <Star className="w-5 h-5 text-amber-400" />
+              <Star className="w-5 h-5 text-nfl-red" />
             </div>
-            <span className="text-slate-400 text-sm">Rate your film</span>
+            <span className="text-nfl-darkGray text-sm font-semibold">Rate your film</span>
           </div>
 
           {/* Download Options */}
-          <h3 className="text-white font-semibold mb-3">Download Options</h3>
-          <div className="space-y-2 mb-6">
+          <h3 className="text-nfl-navy font-black text-lg mb-3 tracking-tight">DOWNLOAD OPTIONS</h3>
+          <div className="space-y-3 mb-6">
             {[
               {
                 title: 'Full Documentary',
                 duration: formatTime(duration || 0),
                 format: 'HD 1080p',
                 icon: Film,
-                color: 'text-amber-400',
+                color: 'text-nfl-red',
               },
               {
                 title: 'Social Highlight',
                 duration: '1:22',
                 format: 'Vertical 9:16',
                 icon: Video,
-                color: 'text-purple-400',
+                color: 'text-nfl-navy',
               },
               {
                 title: 'Photo Gallery',
                 duration: '47 photos',
                 format: 'High-res',
                 icon: Camera,
-                color: 'text-blue-400',
+                color: 'text-nfl-red',
               },
             ].map((item, i) => {
               const Icon = item.icon;
               return (
                 <div
                   key={i}
-                  className="bg-slate-800 rounded-xl p-4 flex items-center justify-between cursor-pointer hover:bg-slate-700 transition-all"
+                  className="bg-white rounded-lg p-4 flex items-center justify-between cursor-pointer hover:shadow-card-hover transition-all shadow-card"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-slate-700 flex items-center justify-center">
-                      <Icon className={`w-5 h-5 ${item.color}`} />
+                    <div className="w-12 h-12 rounded-lg bg-nfl-navy flex items-center justify-center">
+                      <Icon className={`w-6 h-6 text-white`} />
                     </div>
                     <div>
-                      <p className="text-white font-medium">{item.title}</p>
-                      <p className="text-slate-400 text-sm">
+                      <p className="text-nfl-navy font-bold">{item.title}</p>
+                      <p className="text-nfl-darkGray text-sm font-medium">
                         {item.duration} • {item.format}
                       </p>
                     </div>
                   </div>
-                  <Download className="w-5 h-5 text-amber-400" />
+                  <Download className="w-5 h-5 text-nfl-red" />
                 </div>
               );
             })}
           </div>
 
           {/* Share Options */}
-          <h3 className="text-white font-semibold mb-3">Share To</h3>
+          <h3 className="text-nfl-navy font-black text-lg mb-3 tracking-tight">SHARE TO</h3>
           <div className="flex gap-3 mb-6">
             {['Instagram', 'TikTok', 'YouTube', 'Facebook'].map((platform, i) => (
-              <div key={i} className="flex-1 bg-slate-800 rounded-xl p-3 text-center cursor-pointer hover:bg-slate-700 transition-all">
-                <div className="w-10 h-10 rounded-full bg-slate-700 mx-auto mb-2 flex items-center justify-center">
-                  <Share2 className="w-5 h-5 text-slate-400" />
+              <div key={i} className="flex-1 bg-white rounded-lg p-3 text-center cursor-pointer hover:shadow-card-hover transition-all shadow-card">
+                <div className="w-10 h-10 rounded-full bg-nfl-navy mx-auto mb-2 flex items-center justify-center">
+                  <Share2 className="w-5 h-5 text-white" />
                 </div>
-                <p className="text-slate-400 text-xs">{platform}</p>
+                <p className="text-nfl-darkGray text-xs font-semibold">{platform}</p>
               </div>
             ))}
           </div>
 
           {/* Physical Products */}
-          <h3 className="text-white font-semibold mb-3">Physical Keepsakes</h3>
-          <div className="space-y-2">
+          <h3 className="text-nfl-navy font-black text-lg mb-3 tracking-tight">PHYSICAL KEEPSAKES</h3>
+          <div className="space-y-3">
             {[
               { title: 'USB Drive', desc: 'Custom case with trip artwork', price: '$19.99' },
               {
@@ -206,13 +206,13 @@ export const DocumentaryPage: React.FC = () => {
             ].map((item, i) => (
               <div
                 key={i}
-                className="bg-slate-800 rounded-xl p-4 flex items-center justify-between cursor-pointer hover:bg-slate-700 transition-all"
+                className="bg-white rounded-lg p-4 flex items-center justify-between cursor-pointer hover:shadow-card-hover transition-all shadow-card"
               >
                 <div>
-                  <p className="text-white font-medium">{item.title}</p>
-                  <p className="text-slate-400 text-sm">{item.desc}</p>
+                  <p className="text-nfl-navy font-bold">{item.title}</p>
+                  <p className="text-nfl-darkGray text-sm font-medium">{item.desc}</p>
                 </div>
-                <span className="text-amber-400 font-semibold">{item.price}</span>
+                <span className="text-nfl-red font-bold text-lg">{item.price}</span>
               </div>
             ))}
           </div>

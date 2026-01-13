@@ -70,7 +70,7 @@ export const LiveCapturePage: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-h-[60vh] overflow-auto bg-slate-900">
+      <div className="max-h-[60vh] overflow-auto bg-nfl-lightGray">
         {/* Live Game Score */}
         {showLiveScore && (
           <div className="p-4">
@@ -92,39 +92,39 @@ export const LiveCapturePage: React.FC = () => {
 
         {/* Audio Journal Prompt */}
         <div className="p-4">
-          <div className="bg-slate-800 rounded-2xl p-4 mb-4">
+          <div className="bg-white rounded-lg p-4 mb-4 shadow-card">
             <div className="flex items-center gap-2 mb-2">
-              <Mic className="w-5 h-5 text-amber-400" />
-              <span className="text-amber-400 font-medium">AUDIO JOURNAL</span>
+              <Mic className="w-5 h-5 text-nfl-red" />
+              <span className="text-nfl-red font-black">AUDIO JOURNAL</span>
             </div>
-            <p className="text-white mb-3">Halftime. Eagles lead 14-10.</p>
-            <p className="text-slate-400 text-sm italic">"How are you feeling right now?"</p>
-            <button className="w-full mt-3 py-3 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-400 font-medium flex items-center justify-center gap-2">
+            <p className="text-nfl-navy font-bold mb-3">Halftime. Eagles lead 14-10.</p>
+            <p className="text-nfl-darkGray text-sm italic font-medium">"How are you feeling right now?"</p>
+            <button className="w-full mt-3 py-3 rounded-lg bg-nfl-red text-white font-black flex items-center justify-center gap-2 hover:bg-nfl-redDark transition-all shadow-card">
               <Mic className="w-5 h-5" />
-              Hold to Record
+              HOLD TO RECORD
             </button>
           </div>
 
           {/* Capture Stats */}
-          <div className="flex items-center justify-around text-center mb-4">
+          <div className="flex items-center justify-around text-center mb-4 bg-white rounded-lg p-3 shadow-card">
             <div>
-              <p className="text-white font-bold">12</p>
-              <p className="text-slate-400 text-xs">Videos</p>
+              <p className="text-nfl-navy font-black text-lg">12</p>
+              <p className="text-nfl-darkGray text-xs font-semibold">Videos</p>
             </div>
-            <div className="w-px h-8 bg-slate-700" />
+            <div className="w-px h-8 bg-nfl-mediumGray" />
             <div>
-              <p className="text-white font-bold">3</p>
-              <p className="text-slate-400 text-xs">Journals</p>
+              <p className="text-nfl-navy font-black text-lg">3</p>
+              <p className="text-nfl-darkGray text-xs font-semibold">Journals</p>
             </div>
-            <div className="w-px h-8 bg-slate-700" />
+            <div className="w-px h-8 bg-nfl-mediumGray" />
             <div>
-              <p className="text-white font-bold">47</p>
-              <p className="text-slate-400 text-xs">Photos</p>
+              <p className="text-nfl-navy font-black text-lg">47</p>
+              <p className="text-nfl-darkGray text-xs font-semibold">Photos</p>
             </div>
-            <div className="w-px h-8 bg-slate-700" />
+            <div className="w-px h-8 bg-nfl-mediumGray" />
             <div>
-              <p className="text-green-400 font-bold">85%</p>
-              <p className="text-slate-400 text-xs">Complete</p>
+              <p className="text-green-600 font-black text-lg">85%</p>
+              <p className="text-nfl-darkGray text-xs font-semibold">Complete</p>
             </div>
           </div>
 
@@ -132,22 +132,22 @@ export const LiveCapturePage: React.FC = () => {
           <div className="flex items-center justify-center gap-6">
             <button
               onClick={() => setCaptureMode('photo')}
-              className={`w-14 h-14 rounded-full flex items-center justify-center ${
-                captureMode === 'photo' ? 'bg-white text-black' : 'bg-slate-800 text-white'
+              className={`w-14 h-14 rounded-full flex items-center justify-center shadow-card ${
+                captureMode === 'photo' ? 'bg-nfl-navy text-white' : 'bg-white text-nfl-darkGray'
               }`}
             >
               <Camera className="w-6 h-6" />
             </button>
             <button
               onClick={() => setShowNotification(!showNotification)}
-              className="w-20 h-20 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 flex items-center justify-center"
+              className="w-20 h-20 rounded-full bg-nfl-red flex items-center justify-center shadow-lg"
             >
               <div className="w-16 h-16 rounded-full border-4 border-white" />
             </button>
             <button
               onClick={() => setCaptureMode('audio')}
-              className={`w-14 h-14 rounded-full flex items-center justify-center ${
-                captureMode === 'audio' ? 'bg-white text-black' : 'bg-slate-800 text-white'
+              className={`w-14 h-14 rounded-full flex items-center justify-center shadow-card ${
+                captureMode === 'audio' ? 'bg-nfl-navy text-white' : 'bg-white text-nfl-darkGray'
               }`}
             >
               <Mic className="w-6 h-6" />
@@ -157,14 +157,14 @@ export const LiveCapturePage: React.FC = () => {
       </div>
 
       {/* Bottom Nav */}
-      <div className="flex items-center justify-around p-3 border-t border-slate-800 bg-black">
-        <button onClick={() => navigate('/')} className="text-slate-500 text-sm">
+      <div className="flex items-center justify-around p-3 border-t border-nfl-mediumGray bg-white shadow-card">
+        <button onClick={() => navigate('/')} className="text-nfl-darkGray text-sm font-semibold">
           Exit
         </button>
-        <button className="text-white text-sm font-medium">Shot List</button>
+        <button className="text-nfl-navy text-sm font-black">Shot List</button>
         <button
           onClick={() => navigate('/documentary/demo')}
-          className="text-amber-400 text-sm font-medium"
+          className="text-nfl-red text-sm font-black"
         >
           Preview
         </button>

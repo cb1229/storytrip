@@ -95,52 +95,52 @@ export const AIPrompts: React.FC<AIPromptsProps> = ({
   return (
     <div className="space-y-3">
       {/* Context Info */}
-      <div className="flex items-center gap-4 text-slate-400 text-sm">
+      <div className="flex items-center gap-4 text-nfl-darkGray text-sm">
         {location && (
           <div className="flex items-center gap-1">
             <MapPin className="w-4 h-4" />
-            <span>{location}</span>
+            <span className="font-semibold">{location}</span>
           </div>
         )}
         <div className="flex items-center gap-1">
           <Clock className="w-4 h-4" />
-          <span className="capitalize">{timeOfDay}</span>
+          <span className="capitalize font-semibold">{timeOfDay}</span>
         </div>
       </div>
 
       {/* AI Prompt Card */}
-      <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-2xl p-4">
+      <div className="bg-nfl-navy rounded-lg p-4 shadow-card">
         <div className="flex items-start gap-3 mb-4">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0">
+          <div className="w-10 h-10 rounded-full bg-nfl-red flex items-center justify-center flex-shrink-0">
             <Sparkles className="w-5 h-5 text-white" />
           </div>
           <div className="flex-1">
-            <p className="text-purple-300 text-xs font-semibold mb-1">AI STORY GUIDE</p>
-            <p className="text-white text-lg font-medium leading-snug">{currentPrompt}</p>
+            <p className="text-nfl-red text-xs font-black mb-1">AI STORY GUIDE</p>
+            <p className="text-white text-lg font-bold leading-snug">{currentPrompt}</p>
           </div>
         </div>
 
         <div className="flex gap-2">
           <button
             onClick={handleNewPrompt}
-            className="flex-1 bg-slate-800 hover:bg-slate-700 rounded-xl py-3 px-4 text-white font-medium transition-all"
+            className="flex-1 bg-white hover:bg-nfl-lightGray rounded-lg py-3 px-4 text-nfl-navy font-black transition-all"
           >
-            Next Prompt
+            NEXT PROMPT
           </button>
           <button
             onClick={handleVoicePrompt}
-            className={`bg-slate-800 hover:bg-slate-700 rounded-xl py-3 px-4 transition-all ${
+            className={`bg-white hover:bg-nfl-lightGray rounded-lg py-3 px-4 transition-all ${
               isListening ? 'animate-pulse' : ''
             }`}
           >
-            <Mic className={`w-5 h-5 ${isListening ? 'text-red-400' : 'text-white'}`} />
+            <Mic className={`w-5 h-5 ${isListening ? 'text-nfl-red' : 'text-nfl-navy'}`} />
           </button>
         </div>
       </div>
 
       {/* Tips */}
-      <div className="bg-slate-800/50 rounded-xl p-3 border border-slate-700">
-        <p className="text-slate-400 text-xs text-center">
+      <div className="bg-white rounded-lg p-3 shadow-card">
+        <p className="text-nfl-darkGray text-xs text-center font-semibold">
           💡 Pro tip: Keep clips under 30 seconds for the best documentary flow
         </p>
       </div>
